@@ -1,22 +1,23 @@
 import React,{ Component } from 'react';
+import PropTypes from 'prop-types';
 import Location from './Location';
 import transformWeather from './../../services/transformWeather';
 import WeatherData from './WeatherData/index';
 import './styles.css';
 
-const location = "Buenos Aires,ar";
 const api_key = "1d2975541b6ee72b19773e809c98e560"
-const api_weather = `http://api.openweathermap.org/data/2.5/weather/?q=${location}&appid=${api_key}`
+const url = 'http://api.openweathermap.org/data/2.5/weather';
+
 
 
 
 
 class WeatherLocation  extends Component {
 
-    constructor(){
+    constructor({city}){
         super();
         this.state = {
-            city: 'Buenos Aires',
+            city,
             data: null
         }
 
@@ -25,24 +26,18 @@ class WeatherLocation  extends Component {
 
 
 
-    handleUpdateClick = () => {
+
+
+
+    componentWillMount = () => {
+        const {city} = this.state;
+        const api_weather = `${url}/?q=${city}&appid=${api_key}`
         fetch(api_weather).then(data=> {
             return data.json();
         }).then(weather_data => {
             const data = transformWeather(weather_data);
             this.setState({data});
         });
-        /*
-        this.setState({
-            data: data2
-        });
-        */
-      console.log("Actualizado")
-    };
-
-
-    componentWillMount = () => {
-     this.handleUpdateClick();
    }
 
    componentDidMount = () => {
@@ -58,7 +53,6 @@ class WeatherLocation  extends Component {
     }
 
    render () {
-       console.log("render");
        const {city,data} = this.state;
      return <div className='weatherLocationCont'>
         <Location city = {city}></Location>
@@ -66,6 +60,10 @@ class WeatherLocation  extends Component {
      </div>
 };
 
+}
+
+WeatherLocation.propTypes = {
+    city : PropTypes.string
 }
 
 export default WeatherLocation;

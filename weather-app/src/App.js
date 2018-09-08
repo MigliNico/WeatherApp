@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import Index from './components/WeaherLocation/index';
+
 import './App.css';
+import LocationList from "./components/LocationList";
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-          <Index> </Index>
+          <LocationList></LocationList>
       </div>
     );
   }
