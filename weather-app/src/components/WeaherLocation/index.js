@@ -21,7 +21,6 @@ class WeatherLocation  extends Component {
             data: null
         }
 
-        console.log("constructor");
     }
 
 
@@ -41,15 +40,12 @@ class WeatherLocation  extends Component {
    }
 
    componentDidMount = () => {
-    console.log("componentDidMount");
    }
 
     componentWillUpdate = () => {
-        console.log("componentWillUpdate");
     }
 
     componentDidUpdate = () => {
-        console.log("componentDidUpdate");
     }
 
    render () {
