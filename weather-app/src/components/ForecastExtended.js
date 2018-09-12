@@ -30,22 +30,33 @@ class ForecastExtended extends Component{
         this.state = {forecastData: null}
     }
 
-    componentDidMount () {
-        const url_forecast = `${url}/?q=${this.props.city}&appid=${api_key}`
+    updateCity = city => {
+        const url_forecast = `${url}/?q=${city}&appid=${api_key}`
 
         fetch(url_forecast).then(
             data => (data.json())
         ).then(
-         weather_data => {
-             console.log("wheather_data")
-             console.log(weather_data);
-             console.log("forecastData")
-             const forecastData = transformForecast(weather_data);
-             console.log(forecastData);
-             this.setState({forecastData});
-         }
+            weather_data => {
+                console.log("wheather_data")
+                console.log(weather_data);
+                console.log("forecastData")
+                const forecastData = transformForecast(weather_data);
+                console.log(forecastData);
+                this.setState({forecastData});
+            }
         )
         ;
+    }
+
+    componentDidMount () {
+      this.updateCity(this.props.city);
+    }
+
+    componentWillReceiveProps (nextProps) {
+     if(nextProps.city != this.props.city){
+         this.setState({forecastData : null});
+         this.updateCity(nextProps.city);
+     }
     }
 
     renderProgress = () => {
