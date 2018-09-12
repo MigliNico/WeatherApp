@@ -20,7 +20,6 @@ class WeatherLocation  extends Component {
             city,
             data: null
         }
-
     }
 
 
