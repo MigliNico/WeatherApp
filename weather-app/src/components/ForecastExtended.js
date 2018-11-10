@@ -49,6 +49,7 @@ class ForecastExtended extends Component{
     }
 
     componentDidMount () {
+        console.log("didMount")
       this.updateCity(this.props.city);
     }
 
